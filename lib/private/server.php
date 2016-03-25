@@ -619,6 +619,12 @@ class Server extends ServerContainer implements IServerContainer {
 
 			return $manager;
 		});
+
+		$this->registerService('ReleaseNotes', function (Server $c) {
+			return new \OC\ReleaseNotes(
+				$c->getDatabaseConnection()
+			);
+		});
 	}
 
 	/**
@@ -1270,6 +1276,13 @@ class Server extends ServerContainer implements IServerContainer {
 	 */
 	public function getShareManager() {
 		return $this->query('ShareManager');
+	}
+
+	/**
+	 * @return \OC\ReleaseNotes
+	 */
+	public function getReleaseNotes() {
+		return $this->query('ReleaseNotes');
 	}
 
 }
